@@ -16,7 +16,7 @@ RUN apt-get update && \
 #    gfortran \
 #    libffi-dev python3 python3-dev gcc libffi-dev
 
-RUN mv -r telegram-leet-bot/* /app/
+RUN mv telegram-leet-bot/* /app/
 
 ENV TZ=Europe/Helsinki 
 # Install any dependencies your script might have
