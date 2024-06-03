@@ -27,8 +27,8 @@ helpString = """Leet bot:
 class leetSession:
     def __init__(self):
         config=configparser.ConfigParser()
-        while  config.read('config.conf') == []:
-            print("shit")
+        while  config.read('data/config.conf') == []:
+            #print("shit")
             self.generate_config()
         
         self.botToken=config['BASICS']['botToken']
@@ -49,7 +49,14 @@ class leetSession:
                 self.allowedChats.append(int(config['ALLOWEDCHATS'][variable]))
             
     def generate_config(self):
-        with open("config.conf", "w") as f:
+        config_directory = os.path.dirname("data/config.conf")
+
+        # Check if the directory exists, if not, create it
+        if config_directory != '':
+            if not os.path.exists(config_directory):
+                os.makedirs(config_directory)
+
+        with open("data/config.conf", "w") as f:
             f.write("[BASICS]\n")
 
             botToken=input("Give botToken given by telegram:")
