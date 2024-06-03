@@ -25,7 +25,7 @@ python main.py
 
 If you don't have a config.conf file available. You will create it on the first run.
 
-# Generating podman image
+## Generating podman image
 
 For podman you can generate a image by running 
 
