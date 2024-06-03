@@ -1,0 +1,18 @@
+#    -------------    telegram-leet-bot.container    -------------    
+
+[Unit]
+Description=Leet bot
+After=local-fs.target
+
+[Container]
+Image=telegram-leet-bot
+Volume=telegram-leet-bot:/app/data
+Exec=python main.py
+
+[Service]
+Restart=on-failure
+
+
+[Install]
+# Start by default on boot
+WantedBy=default.target              
