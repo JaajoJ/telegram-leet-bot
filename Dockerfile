@@ -11,7 +11,7 @@ COPY data /app/data
 RUN apt-get update && \
     apt-get install -y \
     git && \
-    git clone https://github.com/JaajoJ/telegram-leet-bot.git /app
+    git clone https://github.com/JaajoJ/telegram-leet-bot.git 
 #    liblapack-dev \
 #    gfortran \
 #    libffi-dev python3 python3-dev gcc libffi-dev
