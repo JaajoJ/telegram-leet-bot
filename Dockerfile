@@ -5,7 +5,7 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # Copy the local code to the container
-# COPY . .
+ COPY data /app/data
 
 # Install system dependencies for numpy
 RUN apt-get update && \
