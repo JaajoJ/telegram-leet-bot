@@ -1,6 +1,6 @@
 # Leet bot
 
-Bot to measure the first \1337 in a groupchat.
+Bot to measure the first /1337 in a groupchat.
 
 When time is exactly 13:37 people can get points according to who is first and who participates the most.
 
