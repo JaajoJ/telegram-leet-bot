@@ -31,6 +31,7 @@ For podman you can generate a image by running
 
 ```
 ./build.sh
+podman volume create telegram-leet-bot
 ```
 Copy the telegram-leet-bot.container file to .config/containers/systemd/
 ```
