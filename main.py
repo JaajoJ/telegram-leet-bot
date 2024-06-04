@@ -23,15 +23,16 @@ helpString = """Leet bot:
 3) Bonus days: Your points are multiplied by 5. Multiplications stack if you participate on these days:
 
 """
+dataDir="data"
 
 class leetSession:
     def __init__(self):
         config=configparser.ConfigParser()
-        while  config.read('data/config.conf') == []:
+        while  config.read(os.path.join(dataDir,'config.conf')) == []:
             self.generate_config()
         
         self.botToken=str(config['BASICS']['botToken'])
-        self.dbFile=str(config['BASICS']['dbFile'])
+        self.dbFile=os.path.join(dataDir, str(config['BASICS']['dbFile']))
         self.dbFileTest=str(config['BASICS']['dbFileTest'])
         self.bonusDays_multiplication=int(config['BASICS']['bonusDays_multiplication'])
 
@@ -48,14 +49,11 @@ class leetSession:
                 self.allowedChats.append(int(config['ALLOWEDCHATS'][variable]))
             
     def generate_config(self):
-        config_directory = os.path.dirname("data/config.conf")
+        
+        if not os.path.exists(dataDir):
+            os.makedirs(dataDir)
 
-        # Check if the directory exists, if not, create it
-        if config_directory != '':
-            if not os.path.exists(config_directory):
-                os.makedirs(config_directory)
-
-        with open("data/config.conf", "w") as f:
+        with open(os.path.join(dataDir,"config.conf"), "w") as f:
             f.write("[BASICS]\n")
 
             botToken=input("Give botToken given by telegram:")
@@ -147,12 +145,8 @@ bot = telebot.TeleBot(sessionVariables.get_botToken())
 
 def create_database(db):
     # Connect to the SQLite database (or create it if it doesn't exist)
-    db_directory = os.path.dirname(db)
-
-    # Check if the directory exists, if not, create it
-    if db_directory != '':
-        if not os.path.exists(db_directory):
-            os.makedirs(db_directory)
+    if not os.path.exists("data"):
+        os.makedirs("data")
 
     connection = sqlite3.connect(db)
     cursor = connection.cursor()
