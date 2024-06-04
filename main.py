@@ -8,7 +8,7 @@ import numpy as np
 from io import BytesIO
 import configparser
 import sys
-
+import os.path
 helpString = """Leet bot:
 -- Commands:
 
@@ -28,12 +28,11 @@ class leetSession:
     def __init__(self):
         config=configparser.ConfigParser()
         while  config.read('data/config.conf') == []:
-            #print("shit")
             self.generate_config()
         
-        self.botToken=config['BASICS']['botToken']
-        self.dbFile=config['BASICS']['dbFile']
-        self.dbFileTest=config['BASICS']['dbFileTest']
+        self.botToken=str(config['BASICS']['botToken'])
+        self.dbFile=str(config['BASICS']['dbFile'])
+        self.dbFileTest=str(config['BASICS']['dbFileTest'])
         self.bonusDays_multiplication=int(config['BASICS']['bonusDays_multiplication'])
 
         self.bonusDays={}
@@ -41,7 +40,7 @@ class leetSession:
             string = config['BONUSDAYS'][variable]
             string = string.split(":")
             #print("Bonus day", string[0])
-            self.bonusDays[string[0]] = string[1]
+            self.bonusDays[string[0]] = str(string[1])
 
         self.allowedChats=[]
         if 'ALLOWEDCHATS' in config:
@@ -271,6 +270,7 @@ def plot_100_days_entries(db, test_mode=False):
 def insert_entry(name, db, overwriteTimestamp=None):
     #print("123")
     # Connect to the SQLite database
+    print(db)
     connection = sqlite3.connect(db)
     cursor = connection.cursor()
 
@@ -465,7 +465,7 @@ def send_ranking(message):
 def log_1337(message):
     if message.chat.id in sessionVariables.get_allowedChats():
         user_name = message.from_user.first_name
-        val = insert_entry(user_name,sessionVariables.get_dbFile)
+        val = insert_entry(user_name,sessionVariables.get_dbFile())
 
 
 
