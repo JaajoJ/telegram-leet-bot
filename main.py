@@ -441,7 +441,7 @@ def send_welcome(message):
 @bot.message_handler(commands=['wtf'])
 def send_last_5(message):
     if message.chat.id in sessionVariables.get_allowedChats():
-        send=print_database(sessionVariables.get_dbFile(), 5)
+        send=print_database(sessionVariables.get_dbFile(), 10)
         if send:
             bot.reply_to(message, send)
         print(message.chat.id)
